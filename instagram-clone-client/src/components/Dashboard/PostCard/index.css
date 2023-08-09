@@ -1,0 +1,23 @@
+.item-logo{
+    height: 24px;
+    width: 24px;
+}
+.card-container{
+    width: 37%;
+    height: 65vh;
+    justify-content: space-evenly;
+}
+.image{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+.image-container{
+    width: 100%;
+    height: 67%;
+}
+.card-container hr{
+    width: 100%;
+    height: 1px;
+    color: gray;
+}

@@ -3,7 +3,7 @@ import SideBar from '../sideBar'
 import Home from '../Home'
 const Dashboard = () => {
   return (
-    <div className='flex'>
+    <div className='dashboard flex'>
       <SideBar />
       <Home />
     </div>

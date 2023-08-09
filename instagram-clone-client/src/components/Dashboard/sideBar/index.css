@@ -2,6 +2,7 @@
     width: 17%;
     height: 100vh;
     border-right: 0.5px solid gray;
+    position: fixed;
 }
 .logo{
     background-image: url(https://static.cdninstagram.com/rsrc.php/v3/yx/r/WtxJZZ3-9ZP.png);
