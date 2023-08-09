@@ -1,6 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 import './index.css'
+import SearchCard from '../../searchCard'
 const ModalSearch = ({isOpen , handleCloseSearchModal}) => {
   return (
     <Modal
@@ -13,6 +14,7 @@ const ModalSearch = ({isOpen , handleCloseSearchModal}) => {
             <div className="header"><h2>Search</h2></div>
             <div className='input-container'><input type="text" placeholder='search'/></div>
             <hr />
+            <SearchCard />
         </div>
     </Modal>
   )
