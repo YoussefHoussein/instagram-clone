@@ -1,6 +1,7 @@
 import React from 'react'
 import './login.css';
 import '../../../utilities.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -13,13 +14,13 @@ const Login = () => {
                     <input type="password" name="" id="" placeholder='password'/>
                 </div>
                 <div className="button flex center">
-                    <button>Log in</button>
+                <Link to={"/dashbaord"} className='link flex center'><button className='login-button'>Log in</button></Link>
                 </div>
             </div>
         </div>
         <div className='signup-link-container flex center'>
             <span>Don't have an account? </span>
-            <a href="#" className='signup-link'>Sign up</a>
+            <Link to={"/signup"} className='signup-link'>Sign up</Link>
         </div>
     </div>
     

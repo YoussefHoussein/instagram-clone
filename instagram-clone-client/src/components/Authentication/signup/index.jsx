@@ -1,5 +1,6 @@
 import React from 'react'
 import './signup.css'
+import { Link } from 'react-router-dom'
 const Signup = () => {
   return (
     <div className='login-container flex col '>
@@ -12,7 +13,8 @@ const Signup = () => {
                     <input type="password" name="" id="" placeholder='password'/>
                 </div>
                 <div className="button flex center">
-                    <button>Log in</button>
+                    <Link to={'/dashbaord'} className='link flex center'><button className='login-button'>Log in</button></Link>
+                    
                 </div>
             </div>
         </div>
