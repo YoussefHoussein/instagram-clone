@@ -8,6 +8,7 @@
     background-color: white;
     border-top-right-radius: 5px;
     box-shadow: 5px 0 10px 5px grey;
+    border: 0;
   }
   
 .search-overlay{
