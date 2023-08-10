@@ -26,6 +26,30 @@ class PostController extends Controller
         $post->save();
         return response()->json(['message' => 'Post created successfully']);
     }
+    public function checkLiked(Request $request){
+        $post_id = $request->post_id;
+        $user_id = Auth::user()->id;
+
+        $posts_liked = Like::where("liker_id", $user_id)->get();
+
+        foreach($posts_liked as $post){
+            if($post->post_id == $post_id){
+                return response()->json(['message' => 'this post is liked']); 
+            }
+        }
+        return response()->json(['message' => 'this post is not liked']); 
+    }
+    public function like(Request $request){
+        $post_id = $request->post_id;
+        $user_id = Auth::user()->id;
+
+        $like = new Like();
+        $like->liker_id = $user_id;
+        $like->post_id = $post_id;
+        $like->save();
+
+        return response()->json(['message' => 'Post liked successfully']);
+    }
     //
 //     public function getPosts(Request $request)
 // {

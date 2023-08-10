@@ -23,3 +23,7 @@ Route::controller(TodoController::class)->group(function () {
 
 Route::post('/getFollwers', [PostController::class, "getPosts"]);
 Route::post('/createPost', [PostController::class, "createPost"]);
+Route::post('/checkLiked', [PostController::class, "checkLiked"]);
+Route::post('/like', [PostController::class, "like"]);
+
+
