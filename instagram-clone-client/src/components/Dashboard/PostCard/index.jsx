@@ -36,6 +36,17 @@ const PostCard = () => {
         setLike(true)
       }
     }
+    else{
+      const response = await axios.post('http://127.0.0.1:8000/api/unlike', data,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          
+        },
+      });
+      if(response.data.message == "unliked"){
+        setLike(false)
+      }
+    }
 
   }
   return (
