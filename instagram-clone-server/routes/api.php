@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
@@ -25,5 +27,10 @@ Route::post('/getFollwers', [PostController::class, "getPosts"]);
 Route::post('/createPost', [PostController::class, "createPost"]);
 Route::post('/checkLiked', [PostController::class, "checkLiked"]);
 Route::post('/like', [PostController::class, "like"]);
+
+Route::post('/checkFollow', [UserController::class, "checkFollowing"]);
+Route::post('/follow', [UserController::class, "follow"]);
+
+
 
 
