@@ -1,12 +1,45 @@
 import React, { useState } from 'react'
 import './index.css'
+import axios from 'axios'
 const PostCard = () => {
   const [like , setLike] = useState(false)
-  const handleLike = ()=>{
-    setLike(!like)
+  const checkLike = async () => {
+    const post_id =16;
+    const data = new FormData()
+    data.append("post_id",post_id)
+    const response = await axios.post('http://127.0.0.1:8000/api/checkLiked', data,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          
+        },
+      });
+      if(response.data.message == "this post is liked"){
+        setLike(true)
+      }
+      else{
+        setLike(false)
+      }
+      
+  }
+  const handleLike = async ()=>{
+    const post_id =16;
+    const data = new FormData()
+    data.append("post_id",post_id)
+    if(!like){
+      const response = await axios.post('http://127.0.0.1:8000/api/like', data,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          
+        },
+      });
+      if(response.data.message == "Post liked successfully"){
+        setLike(true)
+      }
+    }
+
   }
   return (
-    <div className='card-container flex col'>
+    <div className='card-container flex col' onLoad={checkLike}>
         <div className="user-information">Youssef</div>
         <div className='image-container'><img className="image" src="/img.jpg" alt="img" /></div>
         <div className="like">
