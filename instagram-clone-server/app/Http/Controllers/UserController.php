@@ -17,7 +17,7 @@ class UserController extends Controller
 
         foreach($followings as $following){
             if($following->followed_id == $followed_id){
-                return response()->json(['message' => 'followed']); 
+                return response()->json(['message' => 'following']); 
             }
         }
         return response()->json(['message' => 'follow']); 

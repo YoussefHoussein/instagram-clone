@@ -1,10 +1,10 @@
 import React from 'react'
 import './index.css'
-const SearchCard = () => {
+const SearchCard = ({name , follow}) => {
   return (
     <div className='search flex'>
-        <span>Name</span>
-        <span>Follow</span>
+        <span>{name}</span>
+        <span>{follow}</span>
     </div>
   )
 }
