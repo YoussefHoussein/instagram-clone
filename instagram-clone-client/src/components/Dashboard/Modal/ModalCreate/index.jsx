@@ -4,6 +4,7 @@ import './index.css'
 const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
     const [selectedFile ,setSelecetdFile] = useState(null)
     const [imageUploaded, setImageUploaded] = useState(false)
+    const [base64 ,setBase64]= useState("")
     const fileInputRef = useRef(null);
   const handleButtonClicked = () => {
     fileInputRef.current.click();
@@ -12,9 +13,9 @@ const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
     const file = event.target.files[0]
     setSelecetdFile(file)
     setImageUploaded(true)
-    console.log(selectedFile)
-    const base64 = await converToBase64(file);
-    console.log(base64)
+    setBase64( await converToBase64(file));
+   
+    
   }
   const handleBack = () => {
     setSelecetdFile(null)
@@ -32,6 +33,19 @@ const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
       })
     })
   }
+  const handleInsert = async () => {
+    const data = new FormData()
+    data.append("image",base64)
+    
+
+    try {
+      const response = await axios.post('/api/posts', formData);
+      console.log(response.data);
+      
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
+  }
   return (
     <Modal
     isOpen={isOpen}
@@ -43,7 +57,7 @@ const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
             {imageUploaded ? (
                 <>
             <span className='back' onClick={handleBack}><svg  height="24"  width="24"><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="2.909" x2="22.001" y1="12.004" y2="12.004"></line><polyline fill="none" points="9.276 4.726 2.001 12.004 9.276 19.274" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline></svg></span>
-            <span className='share'>Share</span> </>
+            <span className='share' onClick={handleInsert}>Share</span> </>
             ) : (<span>Create new post</span>)}           
         </div>
         <div className="down flex col center">

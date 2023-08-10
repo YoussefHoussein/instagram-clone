@@ -15,8 +15,9 @@ const Login = () => {
     
     const handleLogin = async () => {
         const response = await axios.post('http://127.0.0.1:8000/api/login',data);
-        console.log(response.data)
+        console.log(response.data.user.id)
         localStorage.setItem('token',response.data.authorisation.token)
+        localStorage.setItem('id',response.data.user.id)
         console.log(response.data.authorisation.token)
 
     }
