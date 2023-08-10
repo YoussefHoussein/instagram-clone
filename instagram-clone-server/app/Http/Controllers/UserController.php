@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Following;
 use App\Models\User;
@@ -31,5 +32,19 @@ class UserController extends Controller
         $follow->save();
 
         return response()->json(['message' => 'user followed successfully']);
+    }
+    public function search(Request $request){
+        $sub_name = $request->name;
+        $users =  User::all();
+        $result = [];
+        foreach($users as $user){
+            if (Str::startsWith($user->name, $sub_name)){
+                $result[] = $user;
+            }
+        }
+        if(count($result)==0){
+            return response()->json(['message' => 'user not found']);
+        }
+        return $result;
     }
 }

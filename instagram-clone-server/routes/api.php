@@ -30,6 +30,8 @@ Route::post('/like', [PostController::class, "like"]);
 
 Route::post('/checkFollow', [UserController::class, "checkFollowing"]);
 Route::post('/follow', [UserController::class, "follow"]);
+Route::post('/search', [UserController::class, "search"]);
+
 
 
 
