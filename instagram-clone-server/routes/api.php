@@ -27,6 +27,8 @@ Route::post('/getFollwers', [PostController::class, "getPosts"]);
 Route::post('/createPost', [PostController::class, "createPost"]);
 Route::post('/checkLiked', [PostController::class, "checkLiked"]);
 Route::post('/like', [PostController::class, "like"]);
+Route::post('/unlike', [PostController::class, "unLike"]);
+
 
 Route::post('/checkFollow', [UserController::class, "checkFollowing"]);
 Route::post('/follow', [UserController::class, "follow"]);

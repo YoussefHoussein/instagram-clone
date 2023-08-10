@@ -50,6 +50,19 @@ class PostController extends Controller
 
         return response()->json(['message' => 'Post liked successfully']);
     }
+    public function unLike(Request $request){
+        $post_id = $request->post_id;
+        $user_id = Auth::user()->id;
+
+        $posts_liked = Like::where("liker_id", $user_id)->get();
+
+        foreach($posts_liked as $post){
+            if($post->post_id == $post_id){
+                $post->delete(); 
+            }
+        }
+        return response()->json(['message' => 'unliked']); 
+    }
     //
 //     public function getPosts(Request $request)
 // {
