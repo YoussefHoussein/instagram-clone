@@ -63,20 +63,19 @@ class PostController extends Controller
         }
         return response()->json(['message' => 'unliked']); 
     }
-    //
-//     public function getPosts(Request $request)
-// {
-//     $user = User::find($request->id);
-//     $followings = $user->following()->get();
-//     $posts = [];
+    
+    public function getPosts(Request $request){
+        $user = User::find($request->id);
+        $followings = $user->following()->get();
+        $posts = [];
 
-//     foreach ($followings as $following) {
-//         $posts[] = $following->posts()
-//             ->with('users', 'likes') 
-//             ->withCount('likes')    
-//             ->get();
-//     }
+        foreach ($followings as $following) {
+            $posts[] = $following->posts()
+                ->with('users', 'likes') 
+                ->withCount('likes')    
+                ->get();
+        }
 
-//     return $posts;
-// }
+        return $posts;
+    }
 }

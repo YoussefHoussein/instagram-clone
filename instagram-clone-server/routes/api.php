@@ -32,6 +32,7 @@ Route::post('/unlike', [PostController::class, "unLike"]);
 
 Route::post('/checkFollow', [UserController::class, "checkFollowing"]);
 Route::post('/follow', [UserController::class, "follow"]);
+Route::post('/unfollow', [UserController::class, "unFollow"]);
 Route::post('/search', [UserController::class, "search"]);
 
 

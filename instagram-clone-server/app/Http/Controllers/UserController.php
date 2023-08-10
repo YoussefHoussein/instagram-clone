@@ -33,6 +33,19 @@ class UserController extends Controller
 
         return response()->json(['message' => 'user followed successfully']);
     }
+    public function unFollow(Request $request){
+        $follower_id= Auth::user()->id;
+        $followed_id = $request->followed_id;
+
+        $followings = Following::where("follower_id", $follower_id)->get();
+
+        foreach($followings as $following){
+            if($following->followed_id == $followed_id){
+                $post->delete(); 
+            }
+        }
+        return response()->json(['message' => 'unliked']); 
+    }
     public function search(Request $request){
         $sub_name = $request->name;
         $users =  User::all();
