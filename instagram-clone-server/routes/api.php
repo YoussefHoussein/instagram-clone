@@ -22,3 +22,4 @@ Route::controller(TodoController::class)->group(function () {
 });
 
 Route::post('/getFollwers', [PostController::class, "getPosts"]);
+Route::post('/createPost', [PostController::class, "createPost"]);
