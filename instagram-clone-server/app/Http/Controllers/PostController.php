@@ -11,7 +11,19 @@ use App\Models\Like;
 class PostController extends Controller
 {
     //
-    public function getPosts(Request $request){
-        
+    public function getPosts(Request $request)
+{
+    $user = User::find($request->id);
+    $followings = $user->following()->get();
+    $posts = [];
+
+    foreach ($followings as $following) {
+        $posts[] = $following->posts()
+            ->with('users', 'likes') 
+            ->withCount('likes')    
+            ->get();
     }
+
+    return $posts;
+}
 }
