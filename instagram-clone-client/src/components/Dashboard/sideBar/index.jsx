@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.css'
 import { Link } from 'react-router-dom'
 import ModalSearch from '../Modal/ModalSearch'
 import ModalCreate from '../Modal/ModalCreate'
+import axios from 'axios'
 const SideBar = () => {
   const [SearchOpen , setSearchOpen] = useState(false);
   const [CreateOpen, setCreateOpen] = useState(false)
@@ -12,6 +13,28 @@ const SideBar = () => {
 
   const handleCloseSearchModal = () => setSearchOpen(false)
   const handleCloseCreateModal = () => setCreateOpen(false)
+  
+
+  const [token ,setToken] = useState(null)
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+    console.log(token)
+  }, []);
+
+  const handleLogout = async () => {
+    try{
+      const response = axios.post('http://127.0.0.1:8000/api/logout',{
+      headers:{
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    console.log(token);
+    }
+    catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
   
   return (
     <div className='sidebar flex center'>
@@ -29,7 +52,7 @@ const SideBar = () => {
             <svg className='item-logo'><path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line></svg>
             <span>Create</span>
             </div>
-            <div className='logout'>Logout</div>
+            <div className='logout' onClick={handleLogout}>Logout</div>
         </div>
         <ModalSearch isOpen={SearchOpen} handleCloseSearchModal= {handleCloseSearchModal}/>
         <ModalCreate isOpen={CreateOpen} handleCloseCreateModal = {handleCloseCreateModal}/>

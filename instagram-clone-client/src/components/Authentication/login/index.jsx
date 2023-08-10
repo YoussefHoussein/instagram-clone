@@ -12,11 +12,13 @@ const Login = () => {
     const handleDataChange = (e) => {
         setData({...data, [e.target.name]: e.target.value});
     }
-    console.log("hiieea")
+    
     const handleLogin = async () => {
         const response = await axios.post('http://127.0.0.1:8000/api/login',data);
-        console.log("hi")
         console.log(response.data)
+        localStorage.setItem('token',response.data.authorisation.token)
+        console.log(response.data.authorisation.token)
+
     }
    
     
