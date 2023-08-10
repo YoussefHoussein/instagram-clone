@@ -1,4 +1,5 @@
 import React, { useState , useRef  } from 'react'
+import axios from 'axios'
 import Modal from 'react-modal'
 import './index.css'
 const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
@@ -39,8 +40,15 @@ const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
     
 
     try {
-      const response = await axios.post('/api/posts', formData);
-      console.log(response.data);
+      const response = await axios.post('http://127.0.0.1:8000/api/createPost', data,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          
+        },
+      });
+      if(response.data.message == "Post created successfully"){
+        handleCloseCreateModal()
+      }
       
     } catch (error) {
       console.error('Error creating post:', error);
