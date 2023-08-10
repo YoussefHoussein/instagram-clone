@@ -8,15 +8,29 @@ const ModalCreate = ({isOpen , handleCloseCreateModal}) => {
   const handleButtonClicked = () => {
     fileInputRef.current.click();
   }
-  const handleFileInput = (event) => {
+  const handleFileInput = async (event) => {
     const file = event.target.files[0]
     setSelecetdFile(file)
     setImageUploaded(true)
     console.log(selectedFile)
+    const base64 = await converToBase64(file);
+    console.log(base64)
   }
   const handleBack = () => {
     setSelecetdFile(null)
     setImageUploaded(false)
+  }
+  const converToBase64 = (file) => {
+    return new Promise((resolve, reject)=>{
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(file);
+      fileReader.onload=(()=>{
+        resolve(fileReader.result)
+      })
+      fileReader.onerror=((error)=>{
+        reject(error)
+      })
+    })
   }
   return (
     <Modal
